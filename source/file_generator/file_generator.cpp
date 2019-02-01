@@ -55,26 +55,26 @@
 
     void file_generator::make_buffer()
     {
-        std::ofstream writeFILE("buffer.txt", std::ios::binary);
+        std::ofstream writeFILE("buffer_reference_data.txt", std::ios::binary);
         writeFILE.write((char*)&get_block, sizeof(get_block));
         writeFILE.write((char*)&get_block_uuid, sizeof(get_block_uuid));
         writeFILE.write((char*)&get_user_amount, sizeof(get_user_amount));
 
-        for(int i = 0; i < get_user_amount;i++)
+        for(int i = 0; i < get_user_amount;)
         {
             writeFILE.write((char*)&ids[i], sizeof(uint16_t));
+            i++;
         }
 
         writeFILE.close();
+        //byte *buffer_reference_data = new byte[sizeof(uint16_t)+ sizeof(uint16_t)+sizeof(boost::uuids::uuid)+(sizeof(uint16_t)*get_user_amount)];
 
-        byte buffer[sizeof(uint16_t)*2+sizeof(boost::uuids::uuid)+ids.size()];
+        std::ifstream readFIle("buffer_reference_data.txt", std::ios::binary);
 
-        std::ifstream readFIle("buffer.txt", std::ios::binary);
-
-        readFIle.read((char*)&buffer, sizeof(buffer));
+        readFIle.read((char*)buffer, sizeof(buffer));
 
         readFIle.close();
-        remove("buffer.txt");
+        remove("buffer_reference_data.txt");
     };
 
     void file_generator::add_stack()
@@ -88,9 +88,10 @@
         {
 
             Signature sig(buffer, sizeof(buffer), private_keys[i]);
+            auto signaturo = sig.data();
 
             writeFILE.write((char*)&i, sizeof(uint16_t));
-            writeFILE.write((char*)&sig, Signature::signatureSize());
+            writeFILE.write((char*)signaturo, Signature::signatureSize());
 
             ++i;
         }

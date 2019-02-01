@@ -1,6 +1,7 @@
 #ifndef LAMPORT_INCLUDES_H
 #define LAMPORT_INCLUDES_H
 
+#include <iostream>
 #include <fstream>
 #include <vector>
 
