@@ -4,9 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <ctime>
+#include <cstdlib>
 
 #include <boost/uuid/uuid.hpp>
-#include <boost/uuid/string_generator.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 
 #include <sodium.h>
 #include "../crypto/src/lamportscheme.h"

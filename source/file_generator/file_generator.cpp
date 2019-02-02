@@ -3,10 +3,20 @@
     file_generator::file_generator()
     {
         sodium_init();
+        set_random();
         add_claim();
         read_claim();
         make_buffer();
         add_stack();
+
+
+    };
+
+    void file_generator::set_random()
+    {
+        srand(time(NULL));
+        block_number=(rand()%UINT64_MAX);
+        user_amount = (rand()%1024) + 1;
     }
 
     void file_generator::add_claim()
@@ -42,7 +52,7 @@
         readFILE.read((char*)&get_block_uuid, sizeof(get_block_uuid));
         readFILE.read((char*)&get_user_amount, sizeof(get_user_amount));
 
-        for(int i = 0; i < get_user_amount;){
+        for(uint16_t i = 0; i < get_user_amount;){
 
             uint16_t id;
             readFILE.read((char*)&id, sizeof(uint16_t));
@@ -60,14 +70,13 @@
         writeFILE.write((char*)&get_block_uuid, sizeof(get_block_uuid));
         writeFILE.write((char*)&get_user_amount, sizeof(get_user_amount));
 
-        for(int i = 0; i < get_user_amount;)
+        for(uint16_t i = 0; i < get_user_amount;)
         {
             writeFILE.write((char*)&ids[i], sizeof(uint16_t));
             i++;
         }
 
         writeFILE.close();
-        //byte *buffer_reference_data = new byte[sizeof(uint16_t)+ sizeof(uint16_t)+sizeof(boost::uuids::uuid)+(sizeof(uint16_t)*get_user_amount)];
 
         std::ifstream readFIle("buffer_reference_data.txt", std::ios::binary);
 

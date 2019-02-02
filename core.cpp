@@ -9,10 +9,11 @@
 int main(int argc, char **argv)
 {
 #ifdef GENERATOR
-    file_generator generator;
+   file_generator();
 #endif
 
 #ifdef VALIDATOR
-    validator validatorf(argv[1]);
+   validator validator(argv[1]);
 #endif
+
 };

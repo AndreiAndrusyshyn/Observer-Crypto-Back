@@ -72,9 +72,9 @@ void validator::validation()
         for (uint16_t i = 0; i < claim_user_amount;)
         {
 
-            Signature ziga_zaga(signatures[i]);
+            Signature sig(signatures[i]);
             auto hello = make_shared<PublicKey>(publicKeys[i]);
-            if (ziga_zaga.check(buffer_reference_data, sizeof(buffer_reference_data), hello) == 0) { throw 1; };
+            if (sig.check(buffer_reference_data, sizeof(buffer_reference_data), hello) == 0) { throw 1; };
 
             i++;
         }

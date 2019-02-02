@@ -13,8 +13,7 @@ public:
     void validation();
 private:
     uint64_t claim_block_number, stack_block_number;
-    uint16_t claim_user_amount, stack_user_amount;
-    uint16_t ID;
+    uint16_t claim_user_amount, stack_user_amount, ID;
     std::vector<uint16_t> paymentID;
     boost::uuids::uuid claim_uuid, stack_uuid;
     std::vector<byte*>publicKeys, signatures;
