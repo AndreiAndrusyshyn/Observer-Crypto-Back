@@ -9,10 +9,14 @@ public:
     explicit validator(const char* file_name);
     void read_claim(ifstream& infile);
     void read_stack(ifstream& infile);
+    void check(const char *file);
     void make_buffer();
     void validation();
+    void check_status(string check);
+    uint16_t return_answer();
+    ~validator();
 private:
-    uint64_t claim_block_number, stack_block_number;
+    uint64_t claim_block_number, stack_block_number, status;
     uint16_t claim_user_amount, stack_user_amount, ID;
     std::vector<uint16_t> paymentID;
     boost::uuids::uuid claim_uuid, stack_uuid;
