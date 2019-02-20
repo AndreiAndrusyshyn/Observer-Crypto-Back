@@ -1,7 +1,8 @@
 #include "DataParser.h"
 #include "../../validation/Validator.cpp"
 
-DataParser::DataParser(const string &FileNameBuffer) : fileName(FileNameBuffer.data()), readFile(fileName, std::ios::binary){
+DataParser::DataParser(const string &FileNameBuffer) : fileName(FileNameBuffer.data()), readFile(fileName, std::ios::binary)
+{
 
     mAnswerDescriptor = open("fifo/answers.fifo", O_WRONLY | O_NONBLOCK);
     readData();
